@@ -55,6 +55,20 @@ func eachRunePos(s, sep string) []int {
 	return result
 }
 
+// substring with format(centering)
+func formatRune(runes []rune, from, to int) string {
+	centeringSpace := ""
+	if from < 0 {
+		centeringSpace = strings.Repeat(" ", 0-from)
+		from = 0
+	}
+	if to > len(runes) {
+		to = len(runes)
+	}
+
+	return centeringSpace + string(runes[from:to])
+}
+
 func main() {
 	flag.Parse()
 	if *pattern == "" {
@@ -89,7 +103,10 @@ func main() {
 	runePattern := []rune(*pattern)
 
 	for _, foundPos := range foundPosList {
-		pos := foundPos.runePos
-		fmt.Printf("%4d\t%s\n", foundPos.lineNo, string(runes[pos-*chars:pos+len(runePattern)+*chars]))
+		from := foundPos.runePos - *chars
+		to := foundPos.runePos + len(runePattern) + *chars
+		str := formatRune(runes, from, to)
+
+		fmt.Printf("%4d\t%s\n", foundPos.lineNo, str)
 	}
 }
