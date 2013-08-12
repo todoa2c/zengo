@@ -1,7 +1,14 @@
 zengo
 =====
 
-A grep like tool that shows around hit position
+A grep like tool that shows around hit position written in Go.
+
+PREREQUIREMENT
+-----------
+Go environment
+
+http://golang.org/
+
 
 INSTALL
 -----------
